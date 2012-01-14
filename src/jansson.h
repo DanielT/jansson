@@ -12,7 +12,7 @@
 #include <stdlib.h>  /* for size_t */
 #include <stdarg.h>
 
-
+#if !defined(STATIC_BUILD)
 #if defined (jansson_EXPORTS)/* it's defined by cmake while building jansson */
 # if defined (_MSC_VER)
 #  define EXPORT __declspec(dllexport)
@@ -25,6 +25,10 @@
 # else
 #  define EXPORT
 # endif
+#endif
+#else
+/* no visibility magic necessary for static builds */
+#define EXPORT
 #endif
 
 #include <jansson_config.h>
